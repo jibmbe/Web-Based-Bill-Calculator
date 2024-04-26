@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bill Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #f7f7f7, #e9e9e9);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    #container {
+        background: linear-gradient(to bottom right, #ffffff, #f2f2f2);
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        width: 400px;
+        transition: box-shadow 0.3s ease;
+    }
+    #container:hover {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 30px;
+    }
+    form {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: #555;
+    }
+    select, input[type="number"] {
+        padding: 12px;
+        width: 100%;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 10px;
+        background-color: #f2f2f2;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    input[type="submit"] {
+        padding: 14px 28px;
+        background: linear-gradient(to bottom, #007bff, #0056b3);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    }
+    input[type="submit"]:hover {
+        background: linear-gradient(to bottom, #0056b3, #003a73);
+        box-shadow: 0 0 20px rgba(0, 123, 255, 0.8);
+    }
+    #result {
+        background: linear-gradient(to bottom, #f2f2f2, #e0e0e0);
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+    }
+    #result:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+</style>
+</head>
+<body>
+
+<div id="container">
+    <h1>Bill Calculator</h1>
+
+    <form id="billForm">
+        <label for="item_name">Item Name:</label>
+        <select id="item_name">
+            <option value="apple">Apple</option>
+            <option value="orange">Orange</option>
+            <option value="peach">Peach</option>
+        </select>
+        <label for="item_amount">Quantity:</label>
+        <input type="number" id="item_amount" min="1" value="1">
+        <input type="submit" value="Calculate Total">
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+document.getElementById('billForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var itemName = document.getElementById('item_name').value;
+    var itemAmount = parseInt(document.getElementById('item_amount').value);
+    var itemCost = 0;
+    
+    switch(itemName) {
+        case 'apple':
+            itemCost = 1.5;
+            break;
+        case 'orange':
+            itemCost = 1.2;
+            break;
+        case 'peach':
+            itemCost = 2;
+            break;
+        default:
+            itemCost = 0;
+    }
+
+    var totalPayment = itemCost * itemAmount;
+    
+    if (totalPayment >= 30) {
+        totalPayment *= 0.9; // 10% discount
+    }
+
+    document.getElementById('result').innerText = 'Total Payment: $' + totalPayment.toFixed(2);
+});
+</script>
+
+</body>
+</html>
